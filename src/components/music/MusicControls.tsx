@@ -1,3 +1,4 @@
+```typescript
 import React, { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX, Play, Pause, SkipBack, SkipForward } from 'lucide-react';
 
@@ -157,3 +158,4 @@ export default function MusicControls({
     </div>
   );
 }
+```
