@@ -1,6 +1,6 @@
 ```typescript
 import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Play, Pause } from 'lucide-react'; // Removed unused imports SkipBack, SkipForward.
+import { Volume2, VolumeX, Play, Pause, SkipBack, SkipForward } from 'lucide-react';
 
 interface MusicControlsProps {
   url: string;
@@ -23,7 +23,6 @@ export default function MusicControls({
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    // Cleanup to pause the audio if the component unmounts.
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -38,7 +37,7 @@ export default function MusicControls({
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        await audioRef.current.play(); // Await ensures catching potential playback errors.
+        await audioRef.current.play();
         onPlaybackStart();
       }
       setIsPlaying(!isPlaying);
@@ -102,7 +101,6 @@ export default function MusicControls({
       />
 
       <div className="flex items-center gap-4">
-        {/* Play/Pause Button */}
         <button
           onClick={handlePlayPause}
           className="p-2 rounded-full hover:bg-gray-100"
@@ -114,7 +112,6 @@ export default function MusicControls({
           )}
         </button>
 
-        {/* Volume Controls */}
         <div className="flex items-center gap-2">
           <button
             onClick={toggleMute}
@@ -137,12 +134,11 @@ export default function MusicControls({
           />
         </div>
 
-        {/* Progress Bar and Time Display */}
         <div className="flex-1">
           <input
             type="range"
             min="0"
-            max={duration || 100} // Prevent division by zero when duration is not yet loaded.
+            max={duration || 100}
             value={currentTime}
             onChange={(e) => {
               const time = parseFloat(e.target.value);
